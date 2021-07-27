@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import {Text, View, StyleSheet, Alert} from 'react-native'
+import React, { } from 'react';
 import {
   useFonts,
   Roboto_400Regular,
@@ -9,11 +8,8 @@ import {
 
 import AppLoading from 'expo-app-loading';
 import Routes  from './src/routes';
-
-import * as Notification from 'expo-notifications';
 import i18n from 'i18n-js';
 import { ptBr } from './src/services/utils/translation';
-import * as Localization from 'expo-localization';
 import moment from 'moment';
 
 
@@ -41,15 +37,3 @@ export default function App(){
       <Routes />
   )
 }
-
-
-const style = StyleSheet.create({
-
-  container:{
-    flex:1,
-    justifyContent:'center',
-    alignItems:'center'
-  }
-
-
-})

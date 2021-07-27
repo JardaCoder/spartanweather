@@ -24,10 +24,12 @@ const AppRoutes : React.FC = () =>(
             name="Preload"
             component={Preload}
         />
+        
         <stackRoutes.Screen
             name="Cities"
             component={Cities}
         />
+
         <stackRoutes.Screen
             name="SearchCities"
             component={SearchCities}

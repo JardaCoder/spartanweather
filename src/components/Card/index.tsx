@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { MaterialIcons } from '@expo/vector-icons';
+import { TouchableOpacity, View, Animated } from 'react-native';
+import {RectButton} from 'react-native-gesture-handler';
+import Swipeable from 'react-native-gesture-handler/Swipeable';
+import i18n from 'i18n-js';
 
 import colors from '../../styles/colors';
 import { 
@@ -15,14 +19,12 @@ import {
 
 } from './style';
 import {styles} from '../../styles/default';
-import { TouchableOpacity, View, Animated } from 'react-native';
-import {RectButton} from 'react-native-gesture-handler';
-import Swipeable from 'react-native-gesture-handler/Swipeable';
-import OpenweatherService from '../../services/OpenweatherService';
+
 import { WeatherResponse } from '../../models/Weather';
-import utils from '../../services/utils/utils';
-import i18n from 'i18n-js';
 import { MyCity } from '../../models/MyCity';
+import utils from '../../services/utils/utils';
+import OpenweatherService from '../../services/OpenweatherService';
+
 
 
 interface CardProps{

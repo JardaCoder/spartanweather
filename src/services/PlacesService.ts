@@ -1,8 +1,7 @@
-import api from "./api";
 import { googlePlacesKey } from "./utils/keys";
 import axios, { AxiosResponse } from 'axios';
-import { Places } from "../models/PlacesInterface";
-import { PlaceDetailResponse } from "../models/PlacesDetail";
+import { Places } from "../models/GooglePlaces";
+import { PlaceDetailResponse } from "../models/GooglePlacesDetail";
 
 var baseUrl = 'https://maps.googleapis.com/maps/api/place/autocomplete/json?'
 

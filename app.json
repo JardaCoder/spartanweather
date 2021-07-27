@@ -23,7 +23,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "br.com.codebomb.weather"
     },
     "web": {
       "favicon": "./assets/favicon.png"

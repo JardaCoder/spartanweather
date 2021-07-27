@@ -1,26 +1,30 @@
 
 import React, { useEffect, useState } from 'react';
-
 import { useNavigation } from '@react-navigation/core';
+import {useRoute } from '@react-navigation/native';
+import i18n from 'i18n-js';
+
+
 import { 
     Container,
     RegularSubTitle,
     BoldTitle,
 } from '../../styles/default';
+
 import { 
     EmptyListContainer,
     CustomFlatList,
     ContainerItem
 
 } from './style';
+
 import {Header} from '../../components/Header';
 import {ForecastCard} from '../../components/ForecastCard';
-import { RouteProp, useRoute } from '@react-navigation/native';
-import OpenweatherService from '../../services/OpenweatherService';
-import { Daily } from '../../models/Weather';
 import { Load } from '../../components/Load/Load';
+import { Daily } from '../../models/Weather';
 import { MyCity } from '../../models/MyCity';
-import i18n from 'i18n-js';
+import OpenweatherService from '../../services/OpenweatherService';
+
 
 
 

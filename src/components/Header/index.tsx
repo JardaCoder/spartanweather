@@ -1,14 +1,14 @@
 import React, { } from 'react';
 import { MaterialIcons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
-import colors from '../../styles/colors';
 import { 
     HeaderContainer,
     GoBack,
     Search, 
     Text 
 } from './style';
-import { useNavigation } from '@react-navigation/native';
+import colors from '../../styles/colors';
 
 interface HeaderProps {
     pressSearch?: () => void;

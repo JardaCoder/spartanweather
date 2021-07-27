@@ -1,6 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { MyCity } from "../models/MyCity";
-import { Prediction } from "../models/PlacesInterface";
 
 const addCity = async (city : MyCity): Promise<void> =>{
 

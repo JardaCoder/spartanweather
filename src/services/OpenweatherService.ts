@@ -1,6 +1,5 @@
 import {openWeatherKey } from "./utils/keys";
 import axios, { AxiosResponse } from 'axios';
-import { Places } from "../models/PlacesInterface";
 import { OneCallResponse, WeatherResponse} from "../models/Weather";
 
 var baseUrl = 'https://api.openweathermap.org/data/2.5/weather?'

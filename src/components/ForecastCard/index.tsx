@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { MaterialIcons } from '@expo/vector-icons';
+import React, {} from 'react';
+import {View} from 'react-native';
+import moment from 'moment';
 
-import colors from '../../styles/colors';
+
 import { 
     Container,
     ContainerMaxMin,
@@ -14,17 +15,12 @@ import {
     WeatherIcon,
 
 } from './style';
+import colors from '../../styles/colors';
 import {styles} from '../../styles/default';
-import { TouchableOpacity, View, Animated } from 'react-native';
-import {RectButton} from 'react-native-gesture-handler';
-import Swipeable from 'react-native-gesture-handler/Swipeable';
-import { Prediction } from '../../models/PlacesInterface';
-import OpenweatherService from '../../services/OpenweatherService';
+
 import { Daily} from '../../models/Weather';
 import utils from '../../services/utils/utils';
-import moment from 'moment';
-import i18n from 'i18n-js';
-
+import OpenweatherService from '../../services/OpenweatherService';
 
 interface CardProps{
     prediction: Daily;

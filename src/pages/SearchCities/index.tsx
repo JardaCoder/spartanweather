@@ -3,6 +3,7 @@ import React, {useState } from 'react';
 import { useNavigation } from '@react-navigation/core';
 import { Alert } from 'react-native';
 import _ from 'lodash';
+import i18n from 'i18n-js';
 
 import { 
     Container,
@@ -16,15 +17,17 @@ import {
     ContainerItem,
 
 } from './style';
+import colors from '../../styles/colors';
+
 import {Header} from '../../components/Header';
 import {Card} from '../../components/Card';
-import PlacesService from '../../services/PlacesService';
-import {Prediction } from '../../models/PlacesInterface';
-import colors from '../../styles/colors';
-import StorageService from '../../services/StorageService';
 import { useMyCitiesContext } from '../../contexts/MyCitiesContext';
-import i18n from 'i18n-js';
+import {Prediction } from '../../models/GooglePlaces';
 import { MyCity } from '../../models/MyCity';
+import StorageService from '../../services/StorageService';
+import PlacesService from '../../services/PlacesService';
+
+
 
 
 export function SearchCities(){

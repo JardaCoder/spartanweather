@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { Alert} from 'react-native';
 import { useNavigation } from '@react-navigation/core';
+import i18n from 'i18n-js';
 
 import { 
     Container,
@@ -15,13 +16,13 @@ import {
     ContainerItem
 
 } from './style';
+
 import {Header} from '../../components/Header';
 import {Card}  from '../../components/Card';
 import { Load } from '../../components/Load/Load';
-import StorageService from '../../services/StorageService';
-import { useMyCitiesContext } from '../../contexts/MyCitiesContext';
-import i18n from 'i18n-js';
 import { MyCity } from '../../models/MyCity';
+import { useMyCitiesContext } from '../../contexts/MyCitiesContext';
+import StorageService from '../../services/StorageService';
 
 
 export function Cities(){

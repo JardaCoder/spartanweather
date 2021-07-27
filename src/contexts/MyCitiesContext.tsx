@@ -2,7 +2,7 @@ import { useNavigation } from "@react-navigation/native";
 import React, {  Dispatch, SetStateAction } from "react";
 import {createContext, useReducer, useContext, useState} from 'react'
 import { MyCity } from "../models/MyCity";
-import { Prediction } from "../models/PlacesInterface";
+import { Prediction } from "../models/GooglePlaces";
 import StorageService from "../services/StorageService";
 
 
