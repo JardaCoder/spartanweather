@@ -5,6 +5,8 @@ export const ptBr = {
     search:'Pesquisar',
     add:'Adicionar',
     preferences:'Preferências',
+    today:'Hoje',
+    tomorrow:'Amanhã',
 
     //Screen cities
     cities:'Cidades',

@@ -22,6 +22,7 @@ import { Daily} from '../../models/Weather';
 import utils from '../../services/utils/utils';
 import OpenweatherService from '../../services/OpenweatherService';
 import { usePreferencesContext } from '../../contexts/PreferencesContext';
+import I18n from 'i18n-js';
 
 interface CardProps{
     prediction: Daily;
@@ -47,7 +48,7 @@ export function ForecastCard({prediction, index} : CardProps){
 
                 <TopHalf>
                     <View>
-                        <Title textTransform={'capitalize'}>{index == 0 ? 'Hoje' : index == 1 ? 'Amanhã' : getDayOfWeek()}</Title>
+                        <Title textTransform={'capitalize'}>{index == 0 ? I18n.t('today') : index == 1 ? I18n.t('tomorrow')  : getDayOfWeek()}</Title>
                         <SmallText color={colors.black} textTransform={'none'}>{formatDateHoursBetween()}</SmallText>
                     </View>
                     
