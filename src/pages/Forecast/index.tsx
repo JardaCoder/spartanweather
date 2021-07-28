@@ -34,11 +34,10 @@ export function Forecast(){
     const [citySelected, setCitySelected] = useState<MyCity>(route.params?.city as MyCity);
     const [weatherList, setWeatherList] = useState<Daily[]>([] as Daily[]);
     const [loading, setLoading] = useState(true);
+    const [refreshing, setRefreshing] = useState(false);
     
 
-
-    useEffect(() =>{
-
+    const refreshList = () =>{
         if(citySelected){
             OpenweatherService.getListWeather(citySelected.latitude, citySelected.longitude ).then(result =>{
                 if(result.data){
@@ -48,6 +47,12 @@ export function Forecast(){
                 setLoading(false);
             })
         }
+
+    }
+
+
+    useEffect(() =>{
+        refreshList()
     },[])
     return(
 
@@ -58,6 +63,8 @@ export function Forecast(){
             <Header goBack={true} title={citySelected.cityName}/>
 
             <CustomFlatList
+                refreshing={refreshing}
+                onRefresh={refreshList}
                 data={weatherList}
                 keyExtractor={(item, index) => index?.toString()}
                 renderItem={({item, index}) =>(

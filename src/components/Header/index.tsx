@@ -13,10 +13,11 @@ import colors from '../../styles/colors';
 interface HeaderProps {
     pressSearch?: () => void;
     goBack?: boolean;
+    config?:boolean;
     title?: string
 }
 
-export function Header ({pressSearch, goBack, title = ''} : HeaderProps){
+export function Header ({pressSearch, goBack, config, title = ''} : HeaderProps){
 
     const navigation = useNavigation();
 
@@ -27,6 +28,11 @@ export function Header ({pressSearch, goBack, title = ''} : HeaderProps){
             {goBack && (
                 <GoBack onPress={() => navigation.goBack()}>
                    <MaterialIcons name="west" color={colors.white} size={32} />
+               </GoBack>
+            )}
+            {config && (
+                <GoBack onPress={() => navigation.navigate('Preferences')}>
+                   <MaterialIcons name="settings" color={colors.white} size={32} />
                </GoBack>
             )}
             <Text>{title}</Text>

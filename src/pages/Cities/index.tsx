@@ -30,6 +30,7 @@ export function Cities(){
     const navigation = useNavigation();
     const myCitiesContext = useMyCitiesContext();
     const [loading, setLoading] = useState(true);
+    const [refreshing, setRefreshing] = useState(false);
 
 
     const searchCities = () => {
@@ -37,7 +38,7 @@ export function Cities(){
     }
 
     const cardPress = (city : MyCity) =>{
-        navigation.navigate('Prediction', {city: city});
+        navigation.navigate('Forecast', {city: city});
     }
 
     const favoritePress = (city : MyCity) =>{
@@ -64,8 +65,12 @@ export function Cities(){
     const refreshList = () =>{
         StorageService.listCities().then(result => {
             setLoading(false);
-            if(result)
+            if(result){
                 myCitiesContext.setMyCities(result);
+            }
+
+        }).finally(() =>{
+            setRefreshing(false);
         });
     }
 
@@ -91,10 +96,12 @@ export function Cities(){
             <Load/>
         :
         <Container>
-            <Header pressSearch={() => searchCities()} title={i18n.t('cities')}/>
+            <Header pressSearch={() => searchCities()} config={true} title={i18n.t('cities')}/>
 
             <CustomFlatList
-
+                refreshing={refreshing}
+                onRefresh={refreshList}
+                extraData={refreshing}
                 data={myCitiesContext?.myCities.sort(sortFavorites)}
                 keyExtractor={(item, index) => index?.toString()}
                 renderItem={({item}) =>(
