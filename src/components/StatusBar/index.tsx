@@ -2,37 +2,30 @@ import React, { memo } from 'react';
 import { 
   View,
   StyleSheet,
-  StatusBar,
-  SafeAreaView, 
-  ColorValue,
-  StatusBarStyle
+  SafeAreaView,
+  StatusBar
 } from 'react-native';
+
 import colors from '../../styles/colors';
 
 const StatusBarComponent = () => {
 
-  const MyStatusBar = (({backgroundColor, ...props} : any) => {
-    return (
-      <View >
-        <SafeAreaView style={[styles.statusBar, { backgroundColor }]}>
-          <StatusBar translucent backgroundColor={backgroundColor} {...props} />
+
+  return (
+    <View>
+        <SafeAreaView style={styles.statusBar}>
+          <StatusBar translucent backgroundColor={colors.azure} barStyle="light-content" />
         </SafeAreaView>
       </View>
-    )
-  })
-  return (
-    <MyStatusBar backgroundColor={colors.azure} barStyle="light-content" />
   )
 }
 
 const STATUSBAR_HEIGHT = StatusBar.currentHeight;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  },
   statusBar: {
     height: STATUSBAR_HEIGHT,
+    backgroundColor:colors.azure
   },
 })
 

@@ -1,8 +1,6 @@
-import { useNavigation } from "@react-navigation/native";
 import React, {  Dispatch, SetStateAction } from "react";
-import {createContext, useReducer, useContext, useState} from 'react'
+import {createContext, useContext, useState} from 'react'
 import { MyCity } from "../models/MyCity";
-import { Prediction } from "../models/GooglePlaces";
 import StorageService from "../services/StorageService";
 
 
@@ -21,14 +19,13 @@ export const MyCitiesContextProvider = ({ children} : any) => {
 
 
    const updateCities = async () => {
+       setMyCities([]);
         StorageService.listCities().then(result => {
             if(result){
                 setMyCities(result);
             }
         });
    }
-   
-  
 
     return (
         <MyCitiesContext.Provider value={{myCities, setMyCities, updateCities}}>

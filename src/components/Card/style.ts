@@ -47,6 +47,17 @@ export const SmallText = styled.Text<{color:string, textTransform?:string }>`
     text-transform:${p => p.textTransform ? p.textTransform : 'capitalize'};
     padding: 3px
 `
+export const FavoriteIcon = styled.TouchableOpacity`
+    height: 35px;
+    width: 35px;
+    align-items: center;
+    justify-content: center;
+`
+export const AddIcon = styled.TouchableOpacity`
+    height:35px;
+    align-items: center;
+    justify-content: center;
+`
 
 export const WeatherIcon = styled.Image`
     width: 35px;
@@ -65,6 +76,12 @@ export const Styles = StyleSheet.create({
         position:'relative',
         right:20,
         paddingLeft:15
+    },
+    swipeable:{
+        paddingHorizontal:15,
+        paddingVertical:10,
+        width:'100%',
+        backgroundColor:'transparent'
     }
 
 })

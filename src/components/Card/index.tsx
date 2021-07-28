@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { MaterialIcons } from '@expo/vector-icons';
-import { TouchableOpacity, View, Animated } from 'react-native';
+import {View, Animated } from 'react-native';
 import {RectButton} from 'react-native-gesture-handler';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import i18n from 'i18n-js';
@@ -16,6 +16,8 @@ import {
     SmallText,
     Styles,
     WeatherIcon,
+    FavoriteIcon,
+    AddIcon
 
 } from './style';
 import {styles} from '../../styles/default';
@@ -24,6 +26,7 @@ import { WeatherResponse } from '../../models/Weather';
 import { MyCity } from '../../models/MyCity';
 import utils from '../../services/utils/utils';
 import OpenweatherService from '../../services/OpenweatherService';
+import { usePreferencesContext } from '../../contexts/PreferencesContext';
 
 
 
@@ -39,12 +42,13 @@ interface CardProps{
 export function Card({type, onPress, addPress, removePress, favoritePress, myCity} : CardProps){
 
     const [weatherBase, setWeatherBase] = useState<WeatherResponse>({} as WeatherResponse);
-    const [iconUrl, setIconUrl] = useState('');
+    const preferencesContext = usePreferencesContext();
 
     useEffect(() =>{
         if(type == 'city'){
             OpenweatherService.getWeather(myCity.latitude, myCity.longitude).then(result =>{
                 setWeatherBase(result.data);
+               
             })
         }      
     }, [])
@@ -52,7 +56,7 @@ export function Card({type, onPress, addPress, removePress, favoritePress, myCit
     return(
 
         <Swipeable
-            containerStyle={{paddingHorizontal:15, paddingVertical:10, width:'100%', backgroundColor:'transparent'}}
+            containerStyle={Styles.swipeable}
             enabled={removePress ? true : false}
             overshootRight={false}
             renderRightActions={() =>(
@@ -79,7 +83,7 @@ export function Card({type, onPress, addPress, removePress, favoritePress, myCit
                     </View>
                     {
                         (type == 'city') &&(
-                            <Degree>{utils.roundDegrees(weatherBase.main?.temp)}</Degree>
+                            <Degree>{utils.roundDegrees(weatherBase.main?.temp, preferencesContext.preferences.degree)}</Degree>
                         )
                     }
                 
@@ -99,8 +103,8 @@ export function Card({type, onPress, addPress, removePress, favoritePress, myCit
                                 }
                                 
                                 <ContainerMaxMin>
-                                    <SmallText color={colors.black}>{utils.roundDegrees(weatherBase.main?.temp_min)}</SmallText>
-                                    <SmallText color={colors.black}>- {utils.roundDegrees(weatherBase.main?.temp_max)}</SmallText>
+                                    <SmallText color={colors.black}>{utils.roundDegrees(weatherBase.main?.temp_min, preferencesContext.preferences.degree)}</SmallText>
+                                    <SmallText color={colors.black}>- {utils.roundDegrees(weatherBase.main?.temp_max, preferencesContext.preferences.degree)}</SmallText>
                                 </ContainerMaxMin>
                             </View>
                         )
@@ -108,15 +112,15 @@ export function Card({type, onPress, addPress, removePress, favoritePress, myCit
 
                     {
                         type == 'search' &&(
-                            <TouchableOpacity onPress={addPress}> 
+                            <AddIcon onPress={addPress}> 
                                 <SmallText color={colors.azure} textTransform={'uppercase'} >{i18n.t('add')}</SmallText>
-                            </TouchableOpacity>
+                            </AddIcon>
                         )
                     }
 
                     {
                         type == 'city' &&(
-                            <TouchableOpacity onPress={favoritePress}>
+                            <FavoriteIcon  onPress={favoritePress}>
                                 
                                 {myCity?.favorito ?
                                     <MaterialIcons name={'favorite'} size={30} color={colors.red}/>
@@ -124,7 +128,7 @@ export function Card({type, onPress, addPress, removePress, favoritePress, myCit
                                     <MaterialIcons name={'favorite-border'} size={30} color={colors.red}/>
                                 }
                                 
-                            </TouchableOpacity>
+                            </FavoriteIcon>
                         )
                     }
 

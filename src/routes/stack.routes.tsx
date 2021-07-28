@@ -7,6 +7,7 @@ import { Cities } from '../pages/Cities';
 import { SearchCities } from '../pages/SearchCities';
 import { Forecast } from '../pages/Forecast';
 import { Preload } from '../pages/Preload';
+import { Preferences } from '../pages/Preferences';
 
 const stackRoutes = createStackNavigator();
 
@@ -36,9 +37,17 @@ const AppRoutes : React.FC = () =>(
         />
 
         <stackRoutes.Screen
-            name="Prediction"
+            name="Forecast"
             component={Forecast}
         />
+
+        <stackRoutes.Screen
+            name="Preferences"
+            component={Preferences}
+        />
+
+
+
 
     </stackRoutes.Navigator>
 )

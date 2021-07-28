@@ -1,7 +1,7 @@
 
-import React, {useState } from 'react';
+import React, {useRef, useState } from 'react';
 import { useNavigation } from '@react-navigation/core';
-import { Alert } from 'react-native';
+import { ActivityIndicator, Alert } from 'react-native';
 import _ from 'lodash';
 import i18n from 'i18n-js';
 
@@ -15,7 +15,7 @@ import {
     EmptyListContainer,
     CustomFlatList,
     ContainerItem,
-
+    ContainerLoading
 } from './style';
 import colors from '../../styles/colors';
 
@@ -34,21 +34,27 @@ export function SearchCities(){
 
     const navigation = useNavigation();
     const myCitiesContext = useMyCitiesContext();
-    const [cities, setCities] = useState<Prediction[]>();
+    const [cities, setCities] = useState<Prediction[]>([]);
+    const inputRef = useRef(null);
+    const[inputSearch, setInputSearch] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const searchCities = (text: string) => {
+        setLoading(true);
+
         PlacesService.searchPlaces(text).then(result => {
-            setCities(result.data?.predictions)    
-        });
+            if(result.data.predictions){
+                setCities(result.data?.predictions)    
+            }
+        }).finally(() =>{
+            setLoading(false);
+        })
 
     }
 
     const addCity = (city : Prediction) => {
-        var myCity = {} as MyCity;
 
-        myCity.placeId = city.place_id;
-        myCity.cityName = city.structured_formatting.main_text;
-        myCity.cityDescription = city.structured_formatting.secondary_text;
+        var myCity = predictionToMyCity(city);
 
         PlacesService.getPlaceDetail(myCity.placeId).then(result=>{
             if(result.data){
@@ -58,8 +64,12 @@ export function SearchCities(){
                 StorageService.addCity(myCity).then(result => {
                     Alert.alert(i18n.t('success'), i18n.t('alertSucessAddCity'));
                     myCitiesContext.updateCities();
+                }).catch((error) =>{
+                    Alert.alert(i18n.t('ops'), i18n.t('errorAddCity'));
                 });
             }
+        }).catch((error) =>{
+            Alert.alert(i18n.t('ops'), i18n.t('errorAddCity'));
         })
 
        
@@ -78,7 +88,11 @@ export function SearchCities(){
     const searchDebounce =  _.debounce((text : string) => searchCities(text), 600)
 
     const onChangeSearchText = (text : string) => {
-        searchDebounce(text);
+        
+        if(text && text.length > 2){
+            searchDebounce(text);
+        }
+        setInputSearch(text);
     }
     
     return(
@@ -95,7 +109,15 @@ export function SearchCities(){
                             placeholder={i18n.t('search')}
                             placeholderTextColor={colors.gray}
                             onChangeText={onChangeSearchText}
+                            ref={inputRef}
                          />
+                         {
+                             loading &&(
+                                 <ContainerLoading>
+                                    <ActivityIndicator color={colors.azure} size="small"></ActivityIndicator>
+                                </ContainerLoading>
+                             )  
+                         }
                     </ContainerItem>
                 }
                 renderItem={({item}) =>(
@@ -106,9 +128,12 @@ export function SearchCities(){
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={{flexGrow:1}}
                 ListEmptyComponent={
-                    <EmptyListContainer>
-                        <BoldTitle>{i18n.t('emptyListSearch')}</BoldTitle>
-                    </EmptyListContainer>
+                    loading ? 
+                        null
+                    :
+                        <EmptyListContainer>
+                            <BoldTitle>{i18n.t(inputSearch  &&  inputSearch.length > 2 && cities?.length < 1 ?  'emptyResult' : 'emptyListSearch')}</BoldTitle>
+                        </EmptyListContainer>
                 }   
             />
 

@@ -21,6 +21,7 @@ import {styles} from '../../styles/default';
 import { Daily} from '../../models/Weather';
 import utils from '../../services/utils/utils';
 import OpenweatherService from '../../services/OpenweatherService';
+import { usePreferencesContext } from '../../contexts/PreferencesContext';
 
 interface CardProps{
     prediction: Daily;
@@ -29,8 +30,10 @@ interface CardProps{
 
 export function ForecastCard({prediction, index} : CardProps){
 
-    const predictionDay =  moment.unix(prediction.dt);
+    const preferencesContext = usePreferencesContext();
 
+    const predictionDay =  moment.unix(prediction.dt);
+    
     const formatDateHoursBetween = () : string =>{
         return predictionDay.format('D [de] MMMM');
     }
@@ -48,7 +51,7 @@ export function ForecastCard({prediction, index} : CardProps){
                         <SmallText color={colors.black} textTransform={'none'}>{formatDateHoursBetween()}</SmallText>
                     </View>
                     
-                    <Degree>{utils.roundDegrees(prediction?.temp.day)}</Degree>
+                    <Degree>{utils.roundDegrees(prediction?.temp.day, preferencesContext.preferences.degree)}</Degree>
                   
                 </TopHalf>
 
@@ -65,8 +68,8 @@ export function ForecastCard({prediction, index} : CardProps){
                         }
                         
                         <ContainerMaxMin>
-                            <SmallText color={colors.black}>{utils.roundDegrees(prediction?.temp.min)}</SmallText>
-                            <SmallText color={colors.black}>- {utils.roundDegrees(prediction?.temp.max)}</SmallText>
+                            <SmallText color={colors.black}>{utils.roundDegrees(prediction?.temp.min, preferencesContext.preferences.degree)}</SmallText>
+                            <SmallText color={colors.black}>- {utils.roundDegrees(prediction?.temp.max, preferencesContext.preferences.degree)}</SmallText>
                         </ContainerMaxMin>
                     </View>
                     

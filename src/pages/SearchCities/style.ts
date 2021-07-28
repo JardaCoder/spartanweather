@@ -15,6 +15,9 @@ export const ContainerItem = styled.View`
     
 `  
 
+export const ContainerLoading =  styled.View`
+    margin:15px
+`
 
 export const CustomFlatList = styled.FlatList`
     width: 100%;
