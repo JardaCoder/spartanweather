@@ -68,8 +68,8 @@ export function ForecastCard({prediction, index} : CardProps){
                         }
                         
                         <ContainerMaxMin>
-                            <SmallText color={colors.black}>{utils.roundDegrees(prediction?.temp.min, preferencesContext.preferences.degree)}</SmallText>
-                            <SmallText color={colors.black}>- {utils.roundDegrees(prediction?.temp.max, preferencesContext.preferences.degree)}</SmallText>
+                            <SmallText color={colors.black} textTransform={'uppercase'}>{utils.roundDegrees(prediction?.temp.min, preferencesContext.preferences.degree)}</SmallText>
+                            <SmallText color={colors.black} textTransform={'uppercase'}>- {utils.roundDegrees(prediction?.temp.max, preferencesContext.preferences.degree)}</SmallText>
                         </ContainerMaxMin>
                     </View>
                     

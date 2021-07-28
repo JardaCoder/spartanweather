@@ -16,7 +16,7 @@ interface PreferencesContextInterface{
 export const PreferencesContext = createContext<PreferencesContextInterface>({} as PreferencesContextInterface);
 
 export const PreferencesContextProvider = ({ children} : any) => {
-   const [preferences, setPreferences] = useState<Preferences>({language:'pt-BR', degree:'F'});
+   const [preferences, setPreferences] = useState<Preferences>({language:'pt-BR', degree:'C'});
 
 
     const getPreferences = async () =>{

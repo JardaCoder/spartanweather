@@ -103,8 +103,8 @@ export function Card({type, onPress, addPress, removePress, favoritePress, myCit
                                 }
                                 
                                 <ContainerMaxMin>
-                                    <SmallText color={colors.black}>{utils.roundDegrees(weatherBase.main?.temp_min, preferencesContext.preferences.degree)}</SmallText>
-                                    <SmallText color={colors.black}>- {utils.roundDegrees(weatherBase.main?.temp_max, preferencesContext.preferences.degree)}</SmallText>
+                                    <SmallText color={colors.black} textTransform={'uppercase'}>{utils.roundDegrees(weatherBase.main?.temp_min, preferencesContext.preferences.degree)}</SmallText>
+                                    <SmallText color={colors.black} textTransform={'uppercase'}>- {utils.roundDegrees(weatherBase.main?.temp_max, preferencesContext.preferences.degree)}</SmallText>
                                 </ContainerMaxMin>
                             </View>
                         )
